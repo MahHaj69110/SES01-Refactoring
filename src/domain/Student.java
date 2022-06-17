@@ -8,7 +8,7 @@ public class Student {
 	private String id;
 	private String name;
 
-	static class CourseSection {
+	class CourseSection {
         CourseSection(Course course, int section) {
             this.course = course;
             this.section = section;
