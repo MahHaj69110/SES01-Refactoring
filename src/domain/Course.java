@@ -8,7 +8,7 @@ public class Course {
 	private String name;
 	private int units;
 	
-	List<Course> prerequisites;
+	private List<Course> prerequisites;
 
 	public Course(String id, String name, int units) {
 		this.id = id;
@@ -18,7 +18,7 @@ public class Course {
 	}
 	
 	public void addPre(Course c) {
-		getPrerequisites().add(c);
+		prerequisites.add(c);
 	}
 
 	public Course withPre(Course... pres) {
@@ -34,9 +34,10 @@ public class Course {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(" {");
-		for (Course pre : getPrerequisites()) {
-			sb.append(pre.getName());
-			sb.append(", ");
+		for (int i= 0; i< prerequisites.size(); i++){
+			sb.append(prerequisites.get(i).getName());
+			if (i< prerequisites.size()-1)
+				sb.append(", ");
 		}
 		sb.append("}");
 		return sb.toString();
@@ -55,6 +56,8 @@ public class Course {
 	}
 
 	public boolean equals(Object obj) {
+		if (!(obj instanceof Course))
+			return false;
 		Course other = (Course)obj;
 		return id.equals(other.id);
 	}
